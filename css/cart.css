@@ -1,0 +1,298 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: 0.5s;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+}
+
+.body {
+  margin: 20px 60px;
+}
+
+.body__opacity {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  padding-bottom: 20px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #ccc;
+}
+
+.product {
+  width: 44%;
+}
+
+.quantity {
+}
+
+.subtotal {
+}
+
+.total {
+}
+
+.clear {
+  margin-right: 20px;
+}
+
+.container {
+}
+
+.card__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  margin-top: 12px;
+}
+
+.img__wrapper {
+  display: flex;
+  width: 44%;
+  margin-bottom: 12px;
+}
+
+.image__product {
+  width: 120px;
+  height: 80px;
+  object-fit: cover;
+}
+
+.image__product__opacity {
+  opacity: 0.5;
+}
+
+.inf__product {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 20px;
+}
+
+.name__product {
+  margin-bottom: 20px;
+}
+
+.quantity__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100px;
+  margin-left: -12px;
+}
+
+.minus {
+  font-size: 18px;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.quantity__product {
+  margin: 0 24px;
+}
+
+.plus {
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.subtotal__product {
+  width: 56px;
+}
+
+.total__product {
+  width: 72px;
+}
+
+.clear__product {
+  color: red;
+  width: 20px;
+  margin-right: 44px;
+  cursor: pointer;
+}
+
+.total__bottom {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 28px;
+  font-weight: bold;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 28px;
+}
+
+.back {
+  display: flex;
+  align-items: center;
+  color: red;
+  border: 1px solid red;
+  padding: 4px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.back__icon {
+  width: 20px;
+  margin-right: 4px;
+}
+
+.buy {
+  color: #fff;
+  background-color: green;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.line {
+  width: calc(100% + 24px);
+  height: 0.8px;
+  background: #ccc;
+  margin: 8px 0 8px -12px;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 10px 12px;
+  margin: 4px 0;
+  margin-bottom: 12px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+input + input {
+  margin-left: 12px;
+}
+
+input:focus {
+  outline: none;
+}
+
+textarea {
+  width: 100%;
+  height: 80px;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  /* display: none; */
+}
+
+.modal__open {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.modal__title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.modal__close {
+  width: 20px;
+  cursor: pointer;
+}
+
+.modal__close:hover {
+  color: red;
+}
+
+.modal__content {
+}
+
+.modal__name {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal__wrapper__address {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+.modal__address {
+  display: flex;
+  flex-direction: column;
+  width: 32%;
+}
+
+.modal__btn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal__cancel {
+  padding: 8px 12px;
+  color: #fff;
+  background-color: rgba(255, 0, 0, 0.6);
+  border-radius: 4px;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  cursor: pointer;
+}
+
+.modal__submit {
+  padding: 8px 12px;
+  color: #fff;
+  background-color: rgba(0, 0, 255, 0.6);
+  border-radius: 4px;
+  margin: 8px 6px 4px 8px;
+  cursor: pointer;
+}
+
+.wrapper__name,
+.wrapper__email,
+.wrapper__phone,
+.wrapper__home__number {
+  display: flex;
+  flex-direction: column;
+}
+
+#first__name__error,
+#last__name__error,
+#email__error,
+#phone__error,
+#home__number__error,
+#province__error,
+#district__error,
+#ward__error {
+  font-size: 14px;
+  color: red;
+  margin-top: -8px;
+  margin-bottom: 8px;
+}

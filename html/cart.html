@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/header.css" />
+    <link rel="stylesheet" href="../css/cart.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- header -->
+    <div class="header">
+      <a class="logo" href="index.html">
+        <img
+          class="logo__img"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Logo_NIKE.svg/1200px-Logo_NIKE.svg.png"
+        />
+        <div class="name__header">Nike</div>
+      </a>
+      <ul class="navbar">
+        <li><a class="nav" href="">HOME</a></li>
+        <li><a class="nav" href="">ABOUT</a></li>
+        <li><a class="nav" href="">BILLS</a></li>
+        <li>
+          <a href="cart.html"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="cart"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+              />
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- body -->
+    <div class="body">
+      <div class="title">
+        <div class="product">Product Name</div>
+        <div class="quantity">Quantity</div>
+        <div class="subtotal">Subtotal</div>
+        <div class="total">Total</div>
+        <div class="clear">Clear Cart</div>
+      </div>
+
+      <div class="container__cart"></div>
+
+      <div class="total__bottom"></div>
+
+      <div class="bottom">
+        <a href="index.html">
+          <button class="back">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="{1.5}"
+              stroke="currentColor"
+              class="back__icon"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+              />
+            </svg>
+            Back to Shopping
+          </button>
+        </a>
+        <button class="buy">Buy</button>
+      </div>
+    </div>
+
+    <!-- modal -->
+    <div class="modal">
+      <div class="modal__header">
+        <div class="modal__title">Thông tin người mua</div>
+        <button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke__width="1.5"
+            stroke="currentColor"
+            class="modal__close"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+      <div class="line"></div>
+      <div class="wrapper__name">
+        <label for="first__name" class="modal__content">Họ và tên</label>
+        <div class="modal__name">
+          <input id="first__name" type="text" placeholder="Họ" />
+          <input id="last__name" type="text" placeholder="Tên" />
+        </div>
+        <span id="first__name__error"></span>
+        <span id="last__name__error"></span>
+      </div>
+      <div class="wrapper__email">
+        <label for="email" class="modal__content">Email</label>
+        <input type="email" id="email" placeholder="Email" />
+        <span id="email__error"></span>
+      </div>
+      <div class="wrapper__phone">
+        <label for="phone" class="modal__content">Số điện thoại</label>
+        <input
+          type="tel"
+          id="phone"
+          placeholder="Số điện thoại"
+          pattern="[0-9]{10}"
+        />
+        <span id="phone__error"></span>
+      </div>
+      <div>
+        <label class="modal__content">Địa chỉ</label>
+        <div class="modal__wrapper__address">
+          <div class="modal__address">
+            <select name="province" id="province">
+              <option>--Chọn Tỉnh/ Thành phố--</option>
+            </select>
+            <span id="province__error"></span>
+          </div>
+          <div class="modal__address">
+            <select name="district" id="district">
+              <option>--Chọn Huyện/ Quận--</option>
+            </select>
+            <span id="district__error"></span>
+          </div>
+          <div class="modal__address">
+            <select name="ward" id="ward">
+              <option>--Chọn Phường/ Xã--</option>
+            </select>
+            <span id="ward__error"></span>
+          </div>
+        </div>
+        <div class="wrapper__home__number">
+          <input type="text" id="home__number" placeholder="Số nhà" />
+          <span id="home__number__error"></span>
+        </div>
+      </div>
+      <div>
+        <label class="modal__content">Lời nhắn</label>
+        <textarea></textarea>
+      </div>
+      <div class="line"></div>
+      <div class="modal__btn">
+        <button class="modal__cancel">Hủy</button>
+        <button class="modal__submit" onclick=" handleSubmit()">
+          Xác nhận
+        </button>
+      </div>
+    </div>
+
+    <!-- js -->
+    <script defer src="../js/index.js"></script>
+    <script defer src="../js/cart.js"></script>
+    <script defer src="../js/modal.js"></script>
+    <script defer src="../js/validate.js"></script>
+    <script defer src="../js/bill.js"></script>
+  </body>
+</html>
