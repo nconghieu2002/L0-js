@@ -67,6 +67,8 @@ const listData = [
 
 const keyLocalStorageListSP = "DANHSACHSP";
 const keyLocalStorageItemCart = "DANHSACHITEMCART";
+const urlApi = "http://localhost:3000/products";
+const totalMap = new Map();
 
 const upListSP = () => {
   localStorage.setItem(keyLocalStorageListSP, JSON.stringify(listData));

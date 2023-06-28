@@ -1,4 +1,4 @@
-.wrapper {
+.bill__wrapper {
   margin: 20px 100px 0 100px;
   text-align: center;
 }
@@ -40,9 +40,14 @@
   width: 50px;
 }
 
-.content {
+.container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  height: 48px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 8px;
+  margin-top: 8px;
 }
 
 .detail__wrapper {
@@ -94,4 +99,24 @@
   width: 24px;
   color: red;
   cursor: pointer;
+}
+
+.bottom {
+  display: flex;
+  margin-top: 28px;
+}
+
+.back {
+  display: flex;
+  align-items: center;
+  color: red;
+  border: 1px solid red;
+  padding: 4px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.back__icon {
+  width: 20px;
+  margin-right: 4px;
 }

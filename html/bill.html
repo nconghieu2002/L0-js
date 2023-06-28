@@ -43,7 +43,7 @@
     </div>
 
     <!-- body -->
-    <div class="wrapper">
+    <div class="bill__wrapper">
       <div class="title">
         <div class="title__code">Code</div>
         <div class="title__name">Customer Name</div>
@@ -53,52 +53,35 @@
         <div class="title__price">Total Price</div>
         <div class="title__return">Return</div>
       </div>
-      <div class="content">
-        <div class="detail__wrapper">
-          <div class="code">123234</div>
-          <button class="detail">
-            Details
+
+      <div class="content"></div>
+      
+      <div class="bottom">
+        <a href="index.html">
+          <button class="back">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth="{1.5}"
               stroke="currentColor"
-              class="detail__icon"
+              class="back__icon"
             >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
               />
             </svg>
+            Back to Shopping
           </button>
-        </div>
-        <div class="name">Cong Hieu</div>
-        <div class="date">11/22/2222</div>
-        <div class="number">2</div>
-        <div class="quantity">2</div>
-        <div class="price">$1234</div>
-        <button class="return">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="{1.5}"
-            stroke="currentColor"
-            class="return__btn"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-        </button>
+        </a>
       </div>
     </div>
 
     <!-- js -->
+    <script defer src="../js/index.js"></script>
+    <script defer src="../js/cart.js"></script>
     <script defer src="../js/bill.js"></script>
   </body>
 </html>

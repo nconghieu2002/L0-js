@@ -27,18 +27,22 @@ function handleTotal() {
   const sumPrice = listProducts.reduce((total, product) => {
     return total + totalPriceProduct(product.price, product.count);
   }, 0);
+  totalMap.set("sumPrice", sumPrice);
   const total = document.querySelector(".total__bottom");
-  total.innerHTML = `Total: $${sumPrice}`;
+  if (total) {
+    total.innerHTML = `Total: $${sumPrice}`;
+  }
 }
 handleTotal();
 
 function renderProduct() {
   const listProducts = getCartProducts(getListSP(), getCart());
   const renderProduct = document.querySelector(".container__cart");
- 
-  renderProduct.innerHTML = listProducts
-    .map((product) => {
-      return ` <div class="card__item">
+
+  if (renderProduct) {
+    renderProduct.innerHTML = listProducts
+      .map((product) => {
+        return ` <div class="card__item">
       <div class="img__wrapper">
         <img
           class="image__product"
@@ -77,8 +81,9 @@ function renderProduct() {
         </svg>
       </button>
     </div>`;
-    })
-    .join("");
+      })
+      .join("");
+  }
 }
 renderProduct();
 
@@ -86,7 +91,7 @@ function handleModal() {
   const body = document.querySelector("body");
   const images = document.querySelectorAll(".image__product");
   const modal = document.querySelector(".modal");
-  
+
   const showModal = () => {
     body.classList.add("body__opacity");
     images.forEach((image) => {
@@ -94,7 +99,7 @@ function handleModal() {
     });
     modal.classList.add("modal__open");
   };
-  
+
   const hideModal = () => {
     body.classList.remove("body__opacity");
     images.forEach((image) => {
@@ -102,11 +107,15 @@ function handleModal() {
     });
     modal.classList.remove("modal__open");
   };
- 
+
   let buyButton = document.querySelector(".buy");
-  buyButton.addEventListener("click", showModal);
+  if (buyButton) {
+    buyButton.addEventListener("click", showModal);
+  }
   let hideButton = document.querySelector(".modal__close");
-  hideButton.addEventListener("click", hideModal);
+  if (hideButton) {
+    hideButton.addEventListener("click", hideModal);
+  }
 }
 handleModal();
 
@@ -117,7 +126,7 @@ function handleCountProduct() {
   const minus = document.querySelectorAll(".minus");
   const count = document.querySelectorAll(".quantity__product");
   const subTotal = document.querySelectorAll(".total__product");
-  
+
   plus.forEach((product, index) => {
     product.addEventListener("click", (e) => {
       const id = Number(e.target.id);
@@ -139,7 +148,7 @@ function handleCountProduct() {
       localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(cart));
     });
   });
-  
+
   minus.forEach((product, index) => {
     product.addEventListener("click", (e) => {
       const id = Number(e.target.id);
