@@ -22,6 +22,11 @@ function createUniqueId() {
 }
 const createId = createUniqueId();
 
+function sumCounts(arr) {
+  const totalCount = arr.reduce((sum, item) => sum + item.count, 0);
+  return totalCount;
+}
+
 function createBill() {
   const firstName = document.querySelector("#first__name").value;
   const lastName = document.querySelector("#last__name").value;
@@ -47,7 +52,9 @@ function createBill() {
       homeNumber,
       message,
       address: `${selectedWard}, ${selectedDistrict}, ${selectedProvince}`,
-      date: currentDate,
+      date: currentDate.toLocaleDateString(),
+      totalQuantity: sumCounts(getCart()),
+      itemNumber: getCart().length,
     };
     console.log(newBill);
     alert("success");
@@ -79,7 +86,6 @@ const getDataFromApi = async () => {
       throw new Error(response.statusText);
     }
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.log("Lỗi khi lấy đơn hàng: " + error);
@@ -89,7 +95,6 @@ const getDataFromApi = async () => {
 async function renderDataFromApi() {
   const bill = document.querySelector(".content");
   const data = await getDataFromApi();
-  console.log(data);
   if (bill) {
     bill.innerHTML = data
       .map((data) => {
@@ -115,10 +120,10 @@ async function renderDataFromApi() {
             </button>
           </div>
           <div class="name">${data.fullName}</div>
-          <div class="date">11/22/2222</div>
-          <div class="number">2</div>
-          <div class="quantity">2</div>
-          <div class="price">$1234</div>
+          <div class="date">${data.date}</div>
+          <div class="number">${data.itemNumber}</div>
+          <div class="quantity">${data.totalQuantity}</div>
+          <div class="price">$${totalMap.get("sumPrice")}</div>
           <button class="return">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -141,7 +146,6 @@ async function renderDataFromApi() {
   }
 }
 renderDataFromApi();
-console.log(totalMap.get("sumPrice"));
 
 // const deleteDataFromApi = async (id) => {
 //   try {

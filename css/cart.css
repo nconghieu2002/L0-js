@@ -156,7 +156,7 @@ input,
 textarea,
 select {
   width: 100%;
-  padding: 10px 12px;
+  padding: 8px 12px;
   margin: 4px 0;
   margin-bottom: 12px;
   border-radius: 4px;
@@ -173,7 +173,7 @@ input:focus {
 
 textarea {
   width: 100%;
-  height: 80px;
+  height: 60px;
 }
 
 textarea:focus {
@@ -189,7 +189,7 @@ textarea:focus {
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 8px;
-  padding: 16px;
+  padding: 12px 16px;
   display: none;
 }
 
@@ -225,6 +225,7 @@ textarea:focus {
 .modal__name {
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
 
 .modal__wrapper__address {
@@ -271,6 +272,13 @@ textarea:focus {
   flex-direction: column;
 }
 
+.wrapper__first__name,
+.wrapper__last__name {
+  display: flex;
+  flex-direction: column;
+  width: 49%;
+}
+
 #first__name__error,
 #last__name__error,
 #email__error,
@@ -282,5 +290,5 @@ textarea:focus {
   font-size: 14px;
   color: red;
   margin-top: -8px;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }

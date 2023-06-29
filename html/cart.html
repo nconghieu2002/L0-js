@@ -19,9 +19,9 @@
         <div class="name__header">Nike</div>
       </a>
       <ul class="navbar">
-        <li><a class="nav" href="">HOME</a></li>
+        <li><a class="nav" href="index.html">HOME</a></li>
         <li><a class="nav" href="">ABOUT</a></li>
-        <li><a class="nav" href="">BILLS</a></li>
+        <li><a class="nav" href="bill.html">BILLS</a></li>
         <li>
           <a href="cart.html"
             ><svg
@@ -106,11 +106,15 @@
       <div class="wrapper__name">
         <label for="first__name" class="modal__content">Họ và tên</label>
         <div class="modal__name">
-          <input id="first__name" type="text" placeholder="Họ" />
-          <input id="last__name" type="text" placeholder="Tên" />
+          <div class="wrapper__first__name">
+            <input id="first__name" type="text" placeholder="Họ" />
+            <span id="first__name__error"></span>
+          </div>
+          <div class="wrapper__last__name">
+            <input id="last__name" type="text" placeholder="Tên" />
+            <span id="last__name__error"></span>
+          </div>
         </div>
-        <span id="first__name__error"></span>
-        <span id="last__name__error"></span>
       </div>
       <div class="wrapper__email">
         <label for="email" class="modal__content">Email</label>

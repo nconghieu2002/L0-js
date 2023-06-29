@@ -130,19 +130,22 @@ function handleCountProduct() {
   plus.forEach((product, index) => {
     product.addEventListener("click", (e) => {
       const id = Number(e.target.id);
-      for (let i = 0; i < cart.length; i++) {
-        if (cart[i].id === id) {
-          if (cart[i].count <= data[i].soLuong) {
-            cart[i].count++;
-            count[index].textContent = cart[i].count;
-            subTotal[index].textContent = totalPriceProduct(
-              data[i].price,
-              cart[i].count
-            );
-            setTimeout(handleTotal, 0);
-          } else {
-            alert("vuot qua so luong");
-          }
+      const cartIndex = cart.findIndex((item) => item.id === id);
+
+      if (cartIndex !== -1) {
+        const productCount = cart[cartIndex].count;
+        const productData = data.find((item) => item.id === id);
+
+        if (productCount < productData.soLuong) {
+          cart[cartIndex].count++;
+          count[index].textContent = cart[cartIndex].count;
+          subTotal[index].textContent = `$${totalPriceProduct(
+            productData.price,
+            cart[cartIndex].count
+          )}`;
+          setTimeout(handleTotal, 0);
+        } else {
+          alert("Vuot qua so luong");
         }
       }
       localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(cart));
@@ -152,15 +155,22 @@ function handleCountProduct() {
   minus.forEach((product, index) => {
     product.addEventListener("click", (e) => {
       const id = Number(e.target.id);
-      for (let i = 0; i < cart.length; i++) {
-        if (cart[i].id === id && cart[i].count > 0) {
-          cart[i].count--;
-          count[index].textContent = cart[i].count;
-          subTotal[index].textContent = totalPriceProduct(
-            data[i].price,
-            cart[i].count
-          );
+      const cartIndex = cart.findIndex((item) => item.id === id);
+
+      if (cartIndex !== -1) {
+        const productCount = cart[cartIndex].count;
+        const productData = data.find((item) => item.id === id);
+
+        if (productCount > 1) {
+          cart[cartIndex].count--;
+          count[index].textContent = cart[cartIndex].count;
+          subTotal[index].textContent = `$${totalPriceProduct(
+            productData.price,
+            cart[cartIndex].count
+          )}`;
           setTimeout(handleTotal, 0);
+        } else {
+          alert("het sp");
         }
       }
       localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(cart));

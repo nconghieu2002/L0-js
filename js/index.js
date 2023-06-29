@@ -52,7 +52,7 @@ const listData = [
     name: "Nike Pegasus Trail 4",
     image:
       "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/c42a4cc9-1672-4759-90b1-8baadd8a413b/pegasus-trail-4-trail-running-shoes-ccqgBb.png",
-    price: 1600,
+    price: 1700,
     soLuong: 10,
   },
   {
@@ -60,7 +60,7 @@ const listData = [
     name: "Air Jordan 1 Elevate Low",
     image:
       "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/34b64f8a-60fe-42d5-8724-ab5c303e62f5/air-jordan-1-elevate-low-shoes-XlkVrM.png",
-    price: 1600,
+    price: 1800,
     soLuong: 10,
   },
 ];
