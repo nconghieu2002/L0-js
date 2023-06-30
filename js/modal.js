@@ -56,7 +56,6 @@ handleDistrict();
 async function handleWard() {
   const selectWard = document.getElementById("ward");
   const selectDistrict = document.getElementById("district");
-
   const fetchWard = async () => {
     try {
       const response = await fetch(`https://provinces.open-api.vn/api/w/`);

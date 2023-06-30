@@ -73,7 +73,6 @@ const totalMap = new Map();
 const upListSP = () => {
   localStorage.setItem(keyLocalStorageListSP, JSON.stringify(listData));
 };
-upListSP();
 
 const getListSP = () => {
   const data = JSON.parse(localStorage.getItem(keyLocalStorageListSP));

@@ -151,7 +151,7 @@ validateAddress();
 
 function handleSubmit() {
   const submit = document.querySelector(".modal__submit");
-  submit.addEventListener("click", (e) => {
+  submit.addEventListener("click", () => {
     const firstName = document.querySelector("#first__name");
     const lastName = document.querySelector("#last__name");
     const email = document.querySelector("#email");

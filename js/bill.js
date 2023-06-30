@@ -27,7 +27,7 @@ function sumCounts(arr) {
   return totalCount;
 }
 
-function createBill() {
+async function createBill() {
   const firstName = document.querySelector("#first__name").value;
   const lastName = document.querySelector("#last__name").value;
   const email = document.querySelector("#email").value;
@@ -55,12 +55,50 @@ function createBill() {
       date: currentDate.toLocaleDateString(),
       totalQuantity: sumCounts(getCart()),
       itemNumber: getCart().length,
+      totalPrice: totalMap.get("sumPrice"),
+      listProducts: getCartProducts(getListSP(), getCart()),
     };
-    console.log(newBill);
     alert("success");
-    postDataToApi(newBill);
+    await postDataToApi(newBill);
     window.location.href = "bill.html";
+    changeQuantityProduct();
   }
+}
+
+function changeQuantityProduct() {
+  const products = getListSP();
+  const cart = getCart();
+
+  cart.forEach((cartItem) => {
+    const product = products.find(
+      (productItem) => productItem.id === cartItem.id
+    );
+    if (product) {
+      product.soLuong -= cartItem.count;
+    }
+  });
+  localStorage.setItem(keyLocalStorageListSP, JSON.stringify(products));
+  localStorage.setItem(keyLocalStorageItemCart, JSON.stringify([]));
+}
+
+async function restoreQuantityProduct(id) {
+  const products = getListSP();
+  const data = await getDataFromApi();
+
+  data.forEach((bill) => {
+    bill.listProducts.forEach((billProduct) => {
+      if (bill.id === id) {
+        const product = products.find(
+          (productItem) => productItem.id === billProduct.id
+        );
+        if (product) {
+          product.soLuong += billProduct.count;
+        }
+      }
+    });
+  });
+  localStorage.setItem(keyLocalStorageListSP, JSON.stringify(products));
+  await deleteDataFromApi(id);
 }
 
 const postDataToApi = async (newProduct) => {
@@ -75,7 +113,7 @@ const postDataToApi = async (newProduct) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Lỗi khi thêm đơn hàng:", error);
+    console.log("Lỗi khi thêm đơn hàng:", error);
   }
 };
 
@@ -92,69 +130,69 @@ const getDataFromApi = async () => {
   }
 };
 
+const deleteDataFromApi = async (id) => {
+  try {
+    const response = await fetch(`http://localhost:3000/products/${id}`, {
+      method: "DELETE",
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log("Lỗi khi xóa đơn hàng:", error);
+  }
+};
+
 async function renderDataFromApi() {
-  const bill = document.querySelector(".content");
+  const bill = document.querySelector(".bill__content");
   const data = await getDataFromApi();
   if (bill) {
     bill.innerHTML = data
       .map((data) => {
         return `<div class="container">
-          <div class="detail__wrapper">
-            <div class="code">${data.id}</div>
-            <button class="detail">
-              Details
-              <svg
+                <div class="detail__wrapper">
+                <div class="code">${data.id}</div>
+                <button class="detail">
+                Details
+                <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth="{1.5}"
                 stroke="currentColor"
                 class="detail__icon"
-              >
+                >
                 <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19.5 8.25l-7.5 7.5-7.5-7.5"
                 />
-              </svg>
-            </button>
-          </div>
-          <div class="name">${data.fullName}</div>
-          <div class="date">${data.date}</div>
-          <div class="number">${data.itemNumber}</div>
-          <div class="quantity">${data.totalQuantity}</div>
-          <div class="price">$${totalMap.get("sumPrice")}</div>
-          <button class="return">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="{1.5}"
-              stroke="currentColor"
-              class="return__btn"
-            >
-              <path
+                </svg>
+                </button>
+                </div>
+                <div class="name">${data.fullName}</div>
+                <div class="date">${data.date}</div>
+                <div class="number">${data.itemNumber}</div>
+                <div class="quantity">${data.totalQuantity}</div>
+                <div class="price">$${data.totalPrice}</div>
+                <button onclick="restoreQuantityProduct('${data.id}')" class="return">
+                <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="{1.5}"
+                stroke="currentColor"
+                class="return__btn"
+                >
+                <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-          </button>
-        </div>`;
+                />
+                </svg>
+                </button>
+                </div>`;
       })
       .join("");
   }
 }
 renderDataFromApi();
-
-// const deleteDataFromApi = async (id) => {
-//   try {
-//     const response = await fetch(`http://localhost:3000/products${id}`, {
-//       method: "DELETE",
-//     });
-//     const data = await response.json();
-//     return data;
-//   } catch (error) {
-//     console.error("Lỗi khi thêm đơn hàng:", error);
-//   }
-// };
