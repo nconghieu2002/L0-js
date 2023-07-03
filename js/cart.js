@@ -1,17 +1,19 @@
 function getCartProducts(data, cart) {
   let listProducts = [];
   for (let i = 0; i < data.length; i++) {
-    for (let j = 0; j < cart.length; j++) {
-      if (data[i].id === cart[j].id) {
-        let product = {
-          id: data[i].id,
-          name: data[i].name,
-          image: data[i].image,
-          price: data[i].price,
-          quantity: data[i].soLuong,
-          count: cart[j].count,
-        };
-        listProducts.push(product);
+    if (cart) {
+      for (let j = 0; j < cart.length; j++) {
+        if (data[i].id === cart[j].id) {
+          let product = {
+            id: data[i].id,
+            name: data[i].name,
+            image: data[i].image,
+            price: data[i].price,
+            quantity: data[i].soLuong,
+            count: cart[j].count,
+          };
+          listProducts.push(product);
+        }
       }
     }
   }
@@ -23,7 +25,10 @@ function totalPriceProduct(price, count) {
 }
 
 function handleTotal() {
-  const listProducts = getCartProducts(getListSP(), getCart());
+  const listProducts = getCartProducts(
+    library.getDataFromLS(keyLocalStorageListSP),
+    library.getDataFromLS(keyLocalStorageItemCart)
+  );
   const sumPrice = listProducts.reduce((total, product) => {
     return total + totalPriceProduct(product.price, product.count);
   }, 0);
@@ -37,7 +42,7 @@ handleTotal();
 
 function emptyCart() {
   const emptyCart = document.querySelector(".empty__cart");
-  const data = getCart();
+  const data = library.getDataFromLS(keyLocalStorageItemCart);
   if (!data || data.length === 0) {
     if (emptyCart) {
       emptyCart.innerHTML = `
@@ -51,7 +56,10 @@ function emptyCart() {
 emptyCart();
 
 function renderProduct() {
-  const listProducts = getCartProducts(getListSP(), getCart());
+  const listProducts = getCartProducts(
+    library.getDataFromLS(keyLocalStorageListSP),
+    library.getDataFromLS(keyLocalStorageItemCart)
+  );
   const renderProduct = document.querySelector(".container__cart");
 
   if (renderProduct) {
@@ -109,17 +117,14 @@ function handleModal() {
     );
   }
   if (hideButton) {
-    hideButton.addEventListener(
-      "click", 
-      () => (modal.style.display = "none")
-    );
+    hideButton.addEventListener("click", () => (modal.style.display = "none"));
   }
 }
 handleModal();
 
 function handleCountProduct() {
-  const data = getListSP();
-  const cart = getCart();
+  const data = library.getDataFromLS(keyLocalStorageListSP);
+  const cart = library.getDataFromLS(keyLocalStorageItemCart);
   const plus = document.querySelectorAll(".plus");
   const minus = document.querySelectorAll(".minus");
   const count = document.querySelectorAll(".quantity__product");
@@ -146,7 +151,7 @@ function handleCountProduct() {
           alert("Vượt quá số lượng sản phẩm sẵn có");
         }
       }
-      localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(cart));
+      library.setDataToLS(keyLocalStorageItemCart, cart);
     });
   });
 
@@ -171,7 +176,7 @@ function handleCountProduct() {
           alert("Sản phẩm đã đạt số lượng tối thiểu");
         }
       }
-      localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(cart));
+      library.setDataToLS(keyLocalStorageItemCart, cart);
     });
   });
 }
@@ -182,9 +187,9 @@ function handleDeleteProduct(id) {
   if (!confirmDelete) {
     return;
   }
-  let cart = getCart();
+  let cart = library.getDataFromLS(keyLocalStorageItemCart);
   let cartAfter = cart.filter((product) => product.id !== id);
-  localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(cartAfter));
+  library.setDataToLS(keyLocalStorageItemCart, cartAfter);
   renderProduct();
   handleTotal();
   handleCountProduct();

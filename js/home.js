@@ -1,9 +1,9 @@
 function getData() {
-  if (localStorage.getItem(keyLocalStorageListSP) === null) {
-    upListSP();
+  if (library.getDataFromLS(keyLocalStorageListSP) === null) {
+    library.setDataToLS(keyLocalStorageListSP, listData);
   }
   const listProduct = document.querySelector(".container");
-  const data = getListSP();
+  const data = library.getDataFromLS(keyLocalStorageListSP);
 
   listProduct.innerHTML = data
     .map((data) => {
@@ -41,8 +41,8 @@ getData();
 
 function addSP(id) {
   let cart = [];
-  let listProducts = getCart();
-  let data = getListSP();
+  let listProducts = library.getDataFromLS(keyLocalStorageItemCart);
+  let data = library.getDataFromLS(keyLocalStorageListSP);
   if (listProducts === null) {
     cart = [];
   } else {
@@ -66,16 +66,19 @@ function addSP(id) {
       alert("Sản phẩm đã hết hàng");
     } else {
       cart.push(product);
+      showNotification();
     }
   }
-  localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(cart));
+  library.setDataToLS(keyLocalStorageItemCart, cart);
   handleQuantityIcon();
 }
 
 const handleQuantityIcon = () => {
-  const products = getCart();
+  const products = library.getDataFromLS(keyLocalStorageItemCart);
   const quantity = document.querySelector(".header__quantity");
-  quantity.innerHTML = `${products.length}`;
+  if (products) {
+    quantity.innerHTML = `${products.length}`;
+  }
 };
 handleQuantityIcon();
 

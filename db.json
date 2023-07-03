@@ -1,149 +1,25 @@
 {
   "products": [
     {
-      "id": "98g9a47rsl",
+      "id": "cs1tiufdeb",
       "fullName": "Cong Hieu",
       "email": "phamtrung110702@gmail.com",
       "phone": "0963260422",
-      "homeNumber": "56",
-      "message": "",
-      "address": "Xã Hồng Phong, Huyện Nam Sách, Tỉnh Hải Dương",
-      "date": "3/7/2023",
-      "totalQuantity": 1,
-      "itemNumber": 1,
-      "totalPrice": 1000,
-      "listProducts": [
-        {
-          "id": 1,
-          "name": "Nike Air Force 1 Premium",
-          "image": "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/734229e4-3a86-4194-b142-38bd0015209b/air-force-1-shoes-pK50VL.png",
-          "price": 1000,
-          "quantity": 1,
-          "count": 1
-        }
-      ]
-    },
-    {
-      "id": "9c6tne1p3p",
-      "fullName": "Cong Hieu",
-      "email": "phamtrung110702@gmail.com",
-      "phone": "0963260422",
-      "homeNumber": "23",
-      "message": "",
-      "address": "Xã Song Vân, Huyện Tân Yên, Tỉnh Bắc Giang",
-      "date": "3/7/2023",
-      "totalQuantity": 7,
-      "itemNumber": 2,
-      "totalPrice": 8200,
-      "listProducts": [
-        {
-          "id": 1,
-          "name": "Nike Air Force 1 Premium",
-          "image": "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/734229e4-3a86-4194-b142-38bd0015209b/air-force-1-shoes-pK50VL.png",
-          "price": 1000,
-          "quantity": 0,
-          "count": 1
-        },
-        {
-          "id": 2,
-          "name": "Nike Air Max Pulse",
-          "image": "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/2e282edb-e916-48cb-8329-97497507ab19/air-max-pulse-shoes-QShhG8.png",
-          "price": 1200,
-          "quantity": 6,
-          "count": 6
-        }
-      ]
-    },
-    {
-      "id": "ittqucaysr",
-      "fullName": "Cong Hieu",
-      "email": "nconghieu2002@gmail.com",
-      "phone": "0963260422",
-      "homeNumber": "5",
-      "message": "",
-      "address": "Xã Hùng Lô, Thành phố Việt Trì, Tỉnh Phú Thọ",
-      "date": "3/7/2023",
-      "totalQuantity": 19,
-      "itemNumber": 2,
-      "totalPrice": 20800,
-      "listProducts": [
-        {
-          "id": 1,
-          "name": "Nike Air Force 1 Premium",
-          "image": "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/734229e4-3a86-4194-b142-38bd0015209b/air-force-1-shoes-pK50VL.png",
-          "price": 1000,
-          "quantity": 10,
-          "count": 10
-        },
-        {
-          "id": 2,
-          "name": "Nike Air Max Pulse",
-          "image": "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/2e282edb-e916-48cb-8329-97497507ab19/air-max-pulse-shoes-QShhG8.png",
-          "price": 1200,
-          "quantity": 10,
-          "count": 9
-        }
-      ]
-    },
-    {
-      "id": "929e6lq444",
-      "fullName": "Cong Hieu",
-      "email": "nconghieu2002@gmail.com",
-      "phone": "0963260422",
-      "homeNumber": "56",
+      "homeNumber": "324",
       "message": "",
       "address": "Phường Đồng Lạc, Thành phố Chí Linh, Tỉnh Hải Dương",
-      "date": "3/7/2023",
-      "totalQuantity": 10,
+      "date": "4/7/2023",
+      "totalQuantity": 3,
       "itemNumber": 1,
-      "totalPrice": 10000,
+      "totalPrice": 3600,
       "listProducts": [
-        {
-          "id": 1,
-          "name": "Nike Air Force 1 Premium",
-          "image": "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/734229e4-3a86-4194-b142-38bd0015209b/air-force-1-shoes-pK50VL.png",
-          "price": 1000,
-          "quantity": 10,
-          "count": 10
-        }
-      ]
-    },
-    {
-      "id": "tsqxoz19v6",
-      "fullName": "Cong Hieu",
-      "email": "nconghieu2002@gmail.com",
-      "phone": "0963260422",
-      "homeNumber": "56",
-      "message": "",
-      "address": "Xã An Hòa, Huyện Tam Dương, Tỉnh Vĩnh Phúc",
-      "date": "3/7/2023",
-      "totalQuantity": 8,
-      "itemNumber": 3,
-      "totalPrice": 9900,
-      "listProducts": [
-        {
-          "id": 1,
-          "name": "Nike Air Force 1 Premium",
-          "image": "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/734229e4-3a86-4194-b142-38bd0015209b/air-force-1-shoes-pK50VL.png",
-          "price": 1000,
-          "quantity": 10,
-          "count": 1
-        },
         {
           "id": 2,
           "name": "Nike Air Max Pulse",
           "image": "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/2e282edb-e916-48cb-8329-97497507ab19/air-max-pulse-shoes-QShhG8.png",
           "price": 1200,
           "quantity": 10,
-          "count": 2
-        },
-        {
-          "id": 3,
-          "name": "Nike Zegama",
-          "image": "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/3129565d-096d-444b-9106-8fe8591e805e/zegama-trail-running-shoes-LhRsM7.png",
-          "price": 1300,
-          "quantity": 10,
-          "count": 5
+          "count": 3
         }
       ]
     }

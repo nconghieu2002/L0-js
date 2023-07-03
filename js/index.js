@@ -70,17 +70,6 @@ const keyLocalStorageItemCart = "DANHSACHITEMCART";
 const urlApi = "http://localhost:3000/products";
 const totalMap = new Map();
 
-const upListSP = () => {
-  localStorage.setItem(keyLocalStorageListSP, JSON.stringify(listData));
-};
 
-const getListSP = () => {
-  const data = JSON.parse(localStorage.getItem(keyLocalStorageListSP));
-  return data;
-};
 
-const getCart = () => {
-  const cart = JSON.parse(localStorage.getItem(keyLocalStorageItemCart));
-  return cart;
-};
 

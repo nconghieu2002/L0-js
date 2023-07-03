@@ -1,32 +1,3 @@
-const createRandomId = (length) => {
-  const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
-  let result = "";
-  for (let i = 0; i < length; i++) {
-    const randomIndex = Math.floor(Math.random() * characters.length);
-    result += characters.charAt(randomIndex);
-  }
-  return result;
-};
-
-const createUniqueId = () => {
-  const createdIds = [];
-  const createId = () => {
-    const id = createRandomId(10);
-    if (createdIds.includes(id)) {
-      return createId();
-    }
-    createdIds.push(id);
-    return id;
-  };
-  return createId;
-};
-const createId = createUniqueId();
-
-function sumCounts(arr) {
-  const totalCount = arr.reduce((sum, item) => sum + item.count, 0);
-  return totalCount;
-}
-
 async function createBill() {
   const firstName = document.querySelector("#first__name").value;
   const lastName = document.querySelector("#last__name").value;
@@ -53,21 +24,53 @@ async function createBill() {
       message,
       address: `${selectedWard}, ${selectedDistrict}, ${selectedProvince}`,
       date: currentDate.toLocaleDateString(),
-      totalQuantity: sumCounts(getCart()),
-      itemNumber: getCart().length,
+      totalQuantity: sumCounts(library.getDataFromLS(keyLocalStorageItemCart)),
+      itemNumber: library.getDataFromLS(keyLocalStorageItemCart).length,
       totalPrice: totalMap.get("sumPrice"),
-      listProducts: getCartProducts(getListSP(), getCart()),
+      listProducts: getCartProducts(
+        library.getDataFromLS(keyLocalStorageListSP),
+        library.getDataFromLS(keyLocalStorageItemCart)
+      ),
     };
     alert("Mua hàng thành công");
-    await postDataToApi(newBill);
+    await postProductsToApi(newBill);
     window.location.href = "bill.html";
     changeQuantityProduct();
   }
 }
 
+const createRandomId = (length) => {
+  const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+  let result = "";
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    result += characters.charAt(randomIndex);
+  }
+  return result;
+};
+
+const createUniqueId = () => {
+  const createdIds = [];
+  const createId = () => {
+    const id = createRandomId(10);
+    if (createdIds.includes(id)) {
+      return createId();
+    }
+    createdIds.push(id);
+    return id;
+  };
+  return createId;
+};
+const createId = createUniqueId();
+
+const sumCounts = (arr) => {
+  const totalCount = arr.reduce((sum, item) => sum + item.count, 0);
+  return totalCount;
+};
+
 const changeQuantityProduct = () => {
-  const products = getListSP();
-  const cart = getCart();
+  const products = library.getDataFromLS(keyLocalStorageListSP);
+  const cart = library.getDataFromLS(keyLocalStorageItemCart);
 
   cart.forEach((cartItem) => {
     const product = products.find(
@@ -77,13 +80,13 @@ const changeQuantityProduct = () => {
       product.soLuong -= cartItem.count;
     }
   });
-  localStorage.setItem(keyLocalStorageListSP, JSON.stringify(products));
-  localStorage.setItem(keyLocalStorageItemCart, JSON.stringify([]));
+  library.setDataToLS(keyLocalStorageListSP, products);
+  library.setDataToLS(keyLocalStorageItemCart, []);
 };
 
 const restoreQuantityProduct = async (id) => {
-  const products = getListSP();
-  const data = await getDataFromApi();
+  const products = library.getDataFromLS(keyLocalStorageListSP);
+  const data = await getProductsFromApi();
   const confirmDelete = confirm("Bạn có muốn xóa đơn hàng này?");
   if (!confirmDelete) {
     return;
@@ -101,49 +104,8 @@ const restoreQuantityProduct = async (id) => {
       }
     });
   });
-  localStorage.setItem(keyLocalStorageListSP, JSON.stringify(products));
-  await deleteDataFromApi(id);
-};
-
-const postDataToApi = async (newProduct) => {
-  try {
-    const response = await fetch(urlApi, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newProduct),
-    });
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.log("Lỗi khi thêm đơn hàng:", error);
-  }
-};
-
-const getDataFromApi = async () => {
-  try {
-    const response = await fetch(urlApi);
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.log("Lỗi khi lấy đơn hàng: " + error);
-  }
-};
-
-const deleteDataFromApi = async (id) => {
-  try {
-    const response = await fetch(`${urlApi}/${id}`, {
-      method: "DELETE",
-    });
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.log("Lỗi khi xóa đơn hàng:", error);
-  }
+  library.setDataToLS(keyLocalStorageListSP, products);
+  await deleteProductsFromApi(id);
 };
 
 const showDetail = async (id) => {
@@ -159,7 +121,7 @@ const hideDetail = () => {
 
 const renderDetailProduct = async (id) => {
   const popupContainer = document.querySelector(".popup__container");
-  const data = await getDataFromApi();
+  const data = await getProductsFromApi();
   const bill = data.find((bill) => bill.id === id);
   if (bill) {
     const productsHtml = bill.listProducts.map((product) => {
@@ -179,7 +141,7 @@ const renderDetailProduct = async (id) => {
 
 async function renderDataFromApi() {
   const bill = document.querySelector(".bill__content");
-  const data = await getDataFromApi();
+  const data = await getProductsFromApi();
   if (bill) {
     bill.innerHTML = data
       .map((data) => {
