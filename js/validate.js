@@ -29,6 +29,10 @@ function validateInput(
       setInfo[inputKey] = true;
     }
   });
+
+  input.addEventListener("input", () => {
+    errorElement.innerHTML = "";
+  });
 }
 
 function validateName() {
@@ -45,7 +49,7 @@ function validateName() {
     setInfo,
     "isFirstName",
     "Vui lòng nhập Họ",
-    "Họ không được chứa số hoặc ký tự đặc biệt"
+    "Họ không được chứa chữ số hoặc ký tự đặc biệt"
   );
   validateInput(
     lastName,
@@ -54,7 +58,7 @@ function validateName() {
     setInfo,
     "isLastName",
     "Vui lòng nhập Tên",
-    "Tên không được chứa số hoặc ký tự đặc biệt"
+    "Tên không được chứa chữ số hoặc ký tự đặc biệt"
   );
 }
 validateName();
@@ -71,7 +75,7 @@ function validateEmail() {
     setInfo,
     "isEmail",
     "Vui lòng nhập Email",
-    "Email không đúng cú pháp"
+    "Email phải có dạng: abc@def.xyz"
   );
 }
 validateEmail();
@@ -88,7 +92,7 @@ function validatePhone() {
     setInfo,
     "isPhone",
     "Vui lòng nhập Số điện thoại",
-    "Số điện thoại không chính xác"
+    "Số điện thoại phải có 10 chữ số và bắt đầu bằng chữ số 0"
   );
 }
 validatePhone();
@@ -96,7 +100,7 @@ validatePhone();
 function validateHomeNumber() {
   const homeNumber = document.querySelector("#home__number");
   const errHomeNumber = document.querySelector("#home__number__error");
-  const homeNumberRegex = /^[0-9]+$/;
+  const homeNumberRegex = /[a-zA-Z0-9]/g;
 
   validateInput(
     homeNumber,
@@ -105,7 +109,7 @@ function validateHomeNumber() {
     setInfo,
     "isHomeNumber",
     "Vui lòng nhập Số nhà",
-    "Số nhà phải là số"
+    "Số nhà không được chứa ký tự đặc biệt"
   );
 }
 validateHomeNumber();

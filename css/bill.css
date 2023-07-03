@@ -41,6 +41,7 @@
 }
 
 .container {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -122,26 +123,90 @@
 }
 
 .popup {
+  width: 600px;
+  max-height: 400px;
+  position: fixed;
+  background-color: #ccc;
+  padding: 8px;
+  overflow: auto;
+  z-index: 10;
+  display: none;
+}
+
+.popup__title {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.popup__title__name {
+  width: 240px;
+}
+
+.popup__title__quantity {
+}
+
+.popup__title__subtotal {
+}
+
+.popup__title__total {
+  width: 48px;
+  text-align: center;
+}
+
+.popup__container {
+  display: flex;
+  flex-direction: column;
 }
 
 .popup__card {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #fff;
+  padding-top: 8px;
+  margin-top: 8px;
 }
 
 .popup__img {
-  width: 120px;
-  height: 80px;
+  width: 100px;
+  height: 60px;
   object-fit: cover;
 }
 
+.wrapper__card__name {
+  display: flex;
+  align-items: center;
+  width: 240px;
+}
+
 .popup__name {
+  margin-left: 8px;
 }
 
 .popup__quantity {
+  width: 62px;
+  text-align: center;
 }
 
 .popup__subtotal {
+  width: 58px;
+  text-align: center;
 }
 
 .popup__total {
+  width: 48px;
+  text-align: center;
+}
+
+.popup__close {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.popup__btn {
+  background-color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
 }

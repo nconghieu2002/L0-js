@@ -1,4 +1,4 @@
-function createRandomId(length) {
+const createRandomId = (length) => {
   const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
   let result = "";
   for (let i = 0; i < length; i++) {
@@ -6,9 +6,9 @@ function createRandomId(length) {
     result += characters.charAt(randomIndex);
   }
   return result;
-}
+};
 
-function createUniqueId() {
+const createUniqueId = () => {
   const createdIds = [];
   const createId = () => {
     const id = createRandomId(10);
@@ -19,7 +19,7 @@ function createUniqueId() {
     return id;
   };
   return createId;
-}
+};
 const createId = createUniqueId();
 
 function sumCounts(arr) {
@@ -58,14 +58,14 @@ async function createBill() {
       totalPrice: totalMap.get("sumPrice"),
       listProducts: getCartProducts(getListSP(), getCart()),
     };
-    alert("success");
+    alert("Mua hàng thành công");
     await postDataToApi(newBill);
     window.location.href = "bill.html";
     changeQuantityProduct();
   }
 }
 
-function changeQuantityProduct() {
+const changeQuantityProduct = () => {
   const products = getListSP();
   const cart = getCart();
 
@@ -79,11 +79,15 @@ function changeQuantityProduct() {
   });
   localStorage.setItem(keyLocalStorageListSP, JSON.stringify(products));
   localStorage.setItem(keyLocalStorageItemCart, JSON.stringify([]));
-}
+};
 
-async function restoreQuantityProduct(id) {
+const restoreQuantityProduct = async (id) => {
   const products = getListSP();
   const data = await getDataFromApi();
+  const confirmDelete = confirm("Bạn có muốn xóa đơn hàng này?");
+  if (!confirmDelete) {
+    return;
+  }
 
   data.forEach((bill) => {
     bill.listProducts.forEach((billProduct) => {
@@ -99,7 +103,7 @@ async function restoreQuantityProduct(id) {
   });
   localStorage.setItem(keyLocalStorageListSP, JSON.stringify(products));
   await deleteDataFromApi(id);
-}
+};
 
 const postDataToApi = async (newProduct) => {
   try {
@@ -132,7 +136,7 @@ const getDataFromApi = async () => {
 
 const deleteDataFromApi = async (id) => {
   try {
-    const response = await fetch(`http://localhost:3000/products/${id}`, {
+    const response = await fetch(`${urlApi}/${id}`, {
       method: "DELETE",
     });
     const data = await response.json();
@@ -142,55 +146,102 @@ const deleteDataFromApi = async (id) => {
   }
 };
 
+const showDetail = async (id) => {
+  const showPopup = document.querySelector(".popup");
+  showPopup.style.display = "block";
+  await renderDetailProduct(id);
+};
+
+const hideDetail = () => {
+  const hidePopup = document.querySelector(".popup");
+  hidePopup.style.display = "none";
+};
+
+const renderDetailProduct = async (id) => {
+  const popupContainer = document.querySelector(".popup__container");
+  const data = await getDataFromApi();
+  const bill = data.find((bill) => bill.id === id);
+  if (bill) {
+    const productsHtml = bill.listProducts.map((product) => {
+      return `<div class="popup__card">
+      <div class="wrapper__card__name">
+        <div><img class="popup__img" src="${product.image}" alt="" /></div>
+        <div class="popup__name">${product.name}</div>
+      </div>
+      <div class="popup__quantity">${product.count}</div>
+      <div class="popup__subtotal">$${product.price}</div>
+      <div class="popup__total">$${product.price * product.count}</div>
+      </div>`;
+    });
+    popupContainer.innerHTML = productsHtml.join("");
+  }
+};
+
 async function renderDataFromApi() {
   const bill = document.querySelector(".bill__content");
   const data = await getDataFromApi();
   if (bill) {
     bill.innerHTML = data
       .map((data) => {
-        return `<div class="container">
-                <div class="detail__wrapper">
-                <div class="code">${data.id}</div>
-                <button class="detail">
-                Details
-                <svg
+        return `<div>
+        <div class="container">
+          <div class="detail__wrapper">
+            <div class="code">${data.id}</div>
+            <button class="detail" onclick="showDetail('${data.id}')">
+              Details
+              <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth="{1.5}"
                 stroke="currentColor"
                 class="detail__icon"
-                >
+              >
                 <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                />
+              </svg>
+            </button>
+          </div>
+          <div class="name">${data.fullName}</div>
+          <div class="date">${data.date}</div>
+          <div class="number">${data.itemNumber}</div>
+          <div class="quantity">${data.totalQuantity}</div>
+          <div class="price">$${data.totalPrice}</div>
+          <button onclick="restoreQuantityProduct('${data.id}')" class="return">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="{1.5}"
+              stroke="currentColor"
+              class="return__btn"
+            >
+              <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-                />
-                </svg>
-                </button>
-                </div>
-                <div class="name">${data.fullName}</div>
-                <div class="date">${data.date}</div>
-                <div class="number">${data.itemNumber}</div>
-                <div class="quantity">${data.totalQuantity}</div>
-                <div class="price">$${data.totalPrice}</div>
-                <button onclick="restoreQuantityProduct('${data.id}')" class="return">
-                <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="{1.5}"
-                stroke="currentColor"
-                class="return__btn"
-                >
-                <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-                </svg>
-                </button>
-                </div>`;
+                d="M8.25 9.75h4.875a2.625 2.625 0 010 5.25H12M8.25 9.75L10.5 7.5M8.25 9.75L10.5 12m9-7.243V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185z"
+              />
+            </svg>
+          </button>
+        </div>
+        <div class="popup">
+          <div class="popup__title">
+            <div class="popup__title__name">Product</div>
+            <div class="popup__title__quantity">Quantity</div>
+            <div class="popup__title__subtotal">Subtotal</div>
+            <div class="popup__title__total">Total</div>
+          </div>
+          <div class="popup__container">
+            
+          </div>
+          <div class="popup__close">
+            <button class="popup__btn"onclick="hideDetail()">Đóng</button>
+          </div>
+        </div>
+      </div>`;
       })
       .join("");
   }

@@ -56,6 +56,8 @@ handleDistrict();
 async function handleWard() {
   const selectWard = document.getElementById("ward");
   const selectDistrict = document.getElementById("district");
+  const selectProvince = document.getElementById("province");
+
   const fetchWard = async () => {
     try {
       const response = await fetch(`https://provinces.open-api.vn/api/w/`);
@@ -69,6 +71,10 @@ async function handleWard() {
       console.log("Có lỗi xảy ra: " + error);
     }
   };
+
+  selectProvince.addEventListener("change", async () => {
+    selectWard.innerHTML = "<option>--Chọn Phường/ Xã--</option>";
+  });
 
   selectDistrict.addEventListener("change", async () => {
     const wards = await fetchWard();

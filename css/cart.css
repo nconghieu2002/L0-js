@@ -2,10 +2,6 @@
   margin: 20px 60px;
 }
 
-.body__opacity {
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
 .title {
   display: flex;
   justify-content: space-between;
@@ -53,10 +49,6 @@
   width: 120px;
   height: 80px;
   object-fit: cover;
-}
-
-.image__product__opacity {
-  opacity: 0.5;
 }
 
 .inf__product {
@@ -190,13 +182,6 @@ textarea:focus {
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 12px 16px;
-  display: none;
-}
-
-.modal__open {
-  background-color: #fff;
-  display: flex;
-  flex-direction: column;
 }
 
 .modal__header {
@@ -291,4 +276,13 @@ textarea:focus {
   color: red;
   margin-top: -8px;
   margin-bottom: 4px;
+}
+
+.background__modal {
+  background-color: #00000075;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  display: none;
 }
