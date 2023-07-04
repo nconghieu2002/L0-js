@@ -286,3 +286,8 @@ textarea:focus {
   height: 100vh;
   display: none;
 }
+
+.empty__cart {
+  display: flex;
+  justify-content: space-around;
+}

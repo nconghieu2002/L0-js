@@ -42,7 +42,10 @@ handleTotal();
 
 function emptyCart() {
   const emptyCart = document.querySelector(".empty__cart");
+  const buyBtn = document.querySelector(".buy");
+  const totalBottom = document.querySelector(".total__bottom");
   const data = library.getDataFromLS(keyLocalStorageItemCart);
+  
   if (!data || data.length === 0) {
     if (emptyCart) {
       emptyCart.innerHTML = `
@@ -50,6 +53,12 @@ function emptyCart() {
     src="https://th.bing.com/th/id/R.afa6a28d0ee0b5e7d55b7a5aecdfedec?rik=eOl3Z%2bU0XvmYlw&riu=http%3a%2f%2fiticsystem.com%2fimg%2fempty-cart.png&ehk=0omil1zRH7T3Pb5iTzvueamUQLSSb55vgY7dLFF8Bl8%3d&risl=&pid=ImgRaw&r=0"
     alt=""
     />`;
+    }
+    if (buyBtn) {
+      buyBtn.style.display = "none";
+    }
+    if (totalBottom) {
+      totalBottom.style.display = "none";
     }
   }
 }
@@ -138,7 +147,6 @@ function handleCountProduct() {
       if (cartIndex !== -1) {
         const productCount = cart[cartIndex].count;
         const productData = data.find((item) => item.id === id);
-
         if (productCount < productData.soLuong) {
           cart[cartIndex].count++;
           count[index].textContent = cart[cartIndex].count;
@@ -163,7 +171,6 @@ function handleCountProduct() {
       if (cartIndex !== -1) {
         const productCount = cart[cartIndex].count;
         const productData = data.find((item) => item.id === id);
-
         if (productCount > 1) {
           cart[cartIndex].count--;
           count[index].textContent = cart[cartIndex].count;

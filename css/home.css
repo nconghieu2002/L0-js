@@ -4,7 +4,7 @@
 
 .container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
@@ -12,8 +12,7 @@
   position: relative;
   box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
   border-radius: 4px;
-  margin-top: 40px;
-  margin-bottom: 20px;
+  margin: 40px 40px 20px 40px;
 }
 
 .content {

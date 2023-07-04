@@ -110,13 +110,17 @@ const restoreQuantityProduct = async (id) => {
 
 const showDetail = async (id) => {
   const showPopup = document.querySelector(".popup");
+  const popupBg = document.querySelector(".background__popup");
   showPopup.style.display = "block";
+  popupBg.style.display = "block";
   await renderDetailProduct(id);
 };
 
 const hideDetail = () => {
   const hidePopup = document.querySelector(".popup");
+  const popupBg = document.querySelector(".background__popup");
   hidePopup.style.display = "none";
+  popupBg.style.display = "none";
 };
 
 const renderDetailProduct = async (id) => {
@@ -189,19 +193,18 @@ async function renderDataFromApi() {
             </svg>
           </button>
         </div>
-        <div class="popup">
-          <div class="popup__title">
-            <div class="popup__title__name">Product</div>
-            <div class="popup__title__quantity">Quantity</div>
-            <div class="popup__title__subtotal">Subtotal</div>
-            <div class="popup__title__total">Total</div>
-          </div>
-          <div class="popup__container">
-            
-          </div>
-          <div class="popup__close">
-            <button class="popup__btn"onclick="hideDetail()">Đóng</button>
-          </div>
+          <div class="popup">
+            <div class="popup__title">
+              <div class="popup__title__name">Product</div>
+              <div class="popup__title__quantity">Quantity</div>
+              <div class="popup__title__subtotal">Subtotal</div>
+              <div class="popup__title__total">Total</div>
+            </div>
+            <div class="popup__container">
+            </div>
+            <div class="popup__close">
+              <button class="popup__btn"onclick="hideDetail()">Đóng</button>
+            </div>
         </div>
       </div>`;
       })
