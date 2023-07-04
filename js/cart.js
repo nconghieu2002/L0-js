@@ -1,36 +1,10 @@
-function getCartProducts(data, cart) {
-  let listProducts = [];
-  for (let i = 0; i < data.length; i++) {
-    if (cart) {
-      for (let j = 0; j < cart.length; j++) {
-        if (data[i].id === cart[j].id) {
-          let product = {
-            id: data[i].id,
-            name: data[i].name,
-            image: data[i].image,
-            price: data[i].price,
-            quantity: data[i].soLuong,
-            count: cart[j].count,
-          };
-          listProducts.push(product);
-        }
-      }
-    }
-  }
-  return listProducts;
-}
-
-function totalPriceProduct(price, count) {
-  return price * count;
-}
-
 function handleTotal() {
-  const listProducts = getCartProducts(
+  const listProducts = library.getCartProducts(
     library.getDataFromLS(keyLocalStorageListSP),
     library.getDataFromLS(keyLocalStorageItemCart)
   );
   const sumPrice = listProducts.reduce((total, product) => {
-    return total + totalPriceProduct(product.price, product.count);
+    return total + library.totalPriceProduct(product.price, product.count);
   }, 0);
   totalMap.set("sumPrice", sumPrice);
   const total = document.querySelector(".total__bottom");
@@ -45,7 +19,7 @@ function emptyCart() {
   const buyBtn = document.querySelector(".buy");
   const totalBottom = document.querySelector(".total__bottom");
   const data = library.getDataFromLS(keyLocalStorageItemCart);
-  
+
   if (!data || data.length === 0) {
     if (emptyCart) {
       emptyCart.innerHTML = `
@@ -65,7 +39,7 @@ function emptyCart() {
 emptyCart();
 
 function renderProduct() {
-  const listProducts = getCartProducts(
+  const listProducts = library.getCartProducts(
     library.getDataFromLS(keyLocalStorageListSP),
     library.getDataFromLS(keyLocalStorageItemCart)
   );
@@ -89,7 +63,7 @@ function renderProduct() {
         </div>
         <div class="subtotal__product">$${product.price}</div>
         <div class="total__product">
-          $${totalPriceProduct(product.price, product.count)}
+          $${library.totalPriceProduct(product.price, product.count)}
         </div>
         <button onclick="handleDeleteProduct(${product.id})">
           <svg
@@ -150,7 +124,7 @@ function handleCountProduct() {
         if (productCount < productData.soLuong) {
           cart[cartIndex].count++;
           count[index].textContent = cart[cartIndex].count;
-          subTotal[index].textContent = `$${totalPriceProduct(
+          subTotal[index].textContent = `$${library.totalPriceProduct(
             productData.price,
             cart[cartIndex].count
           )}`;
@@ -174,7 +148,7 @@ function handleCountProduct() {
         if (productCount > 1) {
           cart[cartIndex].count--;
           count[index].textContent = cart[cartIndex].count;
-          subTotal[index].textContent = `$${totalPriceProduct(
+          subTotal[index].textContent = `$${library.totalPriceProduct(
             productData.price,
             cart[cartIndex].count
           )}`;

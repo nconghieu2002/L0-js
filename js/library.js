@@ -46,11 +46,76 @@ const library = (() => {
     }
   };
 
+  function getCartProducts(data, cart) {
+    let listProducts = [];
+    for (let i = 0; i < data.length; i++) {
+      if (cart) {
+        for (let j = 0; j < cart.length; j++) {
+          if (data[i].id === cart[j].id) {
+            let product = {
+              id: data[i].id,
+              name: data[i].name,
+              image: data[i].image,
+              price: data[i].price,
+              quantity: data[i].soLuong,
+              count: cart[j].count,
+            };
+            listProducts.push(product);
+          }
+        }
+      }
+    }
+    return listProducts;
+  }
+
+  const createRandomId = (length) => {
+    const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+    let result = "";
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      result += characters.charAt(randomIndex);
+    }
+    return result;
+  };
+
+  const createUniqueId = () => {
+    const createdIds = [];
+    const createId = () => {
+      const id = createRandomId(10);
+      if (createdIds.includes(id)) {
+        return createId();
+      }
+      createdIds.push(id);
+      return id;
+    };
+    return createId;
+  };
+  const createId = createUniqueId();
+
+  const totalPriceProduct = (price, count) => {
+    return price * count;
+  };
+  
+  const handleSum = (arr, property) => {
+    if (Array.isArray(arr) && arr.length > 0) {
+      if (typeof arr[0] === "number") {
+        return arr.reduce((total, num) => total + num, 0);
+      } else if (typeof arr[0] === "object" && property) {
+        return arr.reduce((total, obj) => total + obj[property], 0);
+      }
+    }
+    return 0;
+  };
+
   return {
     setDataToLS,
     getDataFromLS,
     getDataFromApi,
     postDataToApi,
     deleteDataFromApi,
+    getCartProducts,
+    totalPriceProduct,
+    createId,
+    handleSum,
   };
 })();

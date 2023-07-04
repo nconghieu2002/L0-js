@@ -38,8 +38,8 @@ function validateInput(
 function validateName() {
   const firstName = document.querySelector("#first__name");
   const lastName = document.querySelector("#last__name");
-  const errFirstName = document.querySelector("#first__name__error");
-  const errLastName = document.querySelector("#last__name__error");
+  const errFirstName = document.querySelector("#first__name--error");
+  const errLastName = document.querySelector("#last__name--error");
   const nameRegex = /^[\p{L} ]+$/u;
 
   validateInput(
@@ -65,7 +65,7 @@ validateName();
 
 function validateEmail() {
   const email = document.querySelector("#email");
-  const errEmail = document.querySelector("#email__error");
+  const errEmail = document.querySelector("#email--error");
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   validateInput(
@@ -82,7 +82,7 @@ validateEmail();
 
 function validatePhone() {
   const phone = document.querySelector("#phone");
-  const errPhone = document.querySelector("#phone__error");
+  const errPhone = document.querySelector("#phone--error");
   const phoneRegex = /^\d{10}$/;
 
   validateInput(
@@ -99,7 +99,7 @@ validatePhone();
 
 function validateHomeNumber() {
   const homeNumber = document.querySelector("#home__number");
-  const errHomeNumber = document.querySelector("#home__number__error");
+  const errHomeNumber = document.querySelector("#home__number--error");
   const homeNumberRegex = /[a-zA-Z0-9]/g;
 
   validateInput(
@@ -118,9 +118,9 @@ function validateAddress() {
   const province = document.querySelector("#province");
   const district = document.querySelector("#district");
   const ward = document.querySelector("#ward");
-  const provinceError = document.querySelector("#province__error");
-  const districtError = document.querySelector("#district__error");
-  const wardError = document.querySelector("#ward__error");
+  const provinceError = document.querySelector("#province--error");
+  const districtError = document.querySelector("#district--error");
+  const wardError = document.querySelector("#ward--error");
 
   province.addEventListener("input", () => {
     provinceError.textContent = "";
@@ -166,34 +166,34 @@ function handleSubmit() {
     const homeNumber = document.querySelector("#home__number");
 
     if (firstName.value.trim() === "") {
-      document.querySelector("#first__name__error").innerHTML =
+      document.querySelector("#first__name--error").innerHTML =
         "Vui lòng nhập Họ";
     }
     if (lastName.value.trim() === "") {
-      document.querySelector("#last__name__error").innerHTML =
+      document.querySelector("#last__name--error").innerHTML =
         "Vui lòng nhập Tên";
     }
     if (email.value.trim() === "") {
-      document.querySelector("#email__error").innerHTML = "Vui lòng nhập Email";
+      document.querySelector("#email--error").innerHTML = "Vui lòng nhập Email";
     }
     if (phone.value.trim() === "") {
-      document.querySelector("#phone__error").innerHTML =
+      document.querySelector("#phone--error").innerHTML =
         "Vui lòng nhập Số điện thoại";
     }
     if (homeNumber.value.trim() === "") {
-      document.querySelector("#home__number__error").innerHTML =
+      document.querySelector("#home__number--error").innerHTML =
         "Vui lòng nhập Số nhà";
     }
     if (province.value === "--Chọn Tỉnh/ Thành phố--") {
-      document.querySelector("#province__error").textContent =
+      document.querySelector("#province--error").textContent =
         "Vui lòng chọn Tỉnh/ Thành phố";
     }
     if (district.value === "--Chọn Huyện/ Quận--") {
-      document.querySelector("#district__error").textContent =
+      document.querySelector("#district--error").textContent =
         "Vui lòng chọn Huyện/ Quận";
     }
     if (ward.value === "--Chọn Phường/ Xã--") {
-      document.querySelector("#ward__error").textContent =
+      document.querySelector("#ward--error").textContent =
         "Vui lòng nhập Phường/ Xã";
     }
   });

@@ -264,14 +264,14 @@ textarea:focus {
   width: 49%;
 }
 
-#first__name__error,
-#last__name__error,
-#email__error,
-#phone__error,
-#home__number__error,
-#province__error,
-#district__error,
-#ward__error {
+#first__name--error,
+#last__name--error,
+#email--error,
+#phone--error,
+#home__number--error,
+#province--error,
+#district--error,
+#ward--error {
   font-size: 14px;
   color: red;
   margin-top: -8px;

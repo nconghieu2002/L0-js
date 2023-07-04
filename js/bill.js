@@ -16,7 +16,7 @@ async function createBill() {
 
   if (isValid) {
     const newBill = {
-      id: createId(),
+      id: library.createId(),
       fullName: `${firstName} ${lastName}`,
       email,
       phone,
@@ -24,10 +24,13 @@ async function createBill() {
       message,
       address: `${selectedWard}, ${selectedDistrict}, ${selectedProvince}`,
       date: currentDate.toLocaleDateString(),
-      totalQuantity: sumCounts(library.getDataFromLS(keyLocalStorageItemCart)),
+      totalQuantity: library.handleSum(
+        library.getDataFromLS(keyLocalStorageItemCart),
+        "count"
+      ),
       itemNumber: library.getDataFromLS(keyLocalStorageItemCart).length,
       totalPrice: totalMap.get("sumPrice"),
-      listProducts: getCartProducts(
+      listProducts: library.getCartProducts(
         library.getDataFromLS(keyLocalStorageListSP),
         library.getDataFromLS(keyLocalStorageItemCart)
       ),
@@ -38,35 +41,6 @@ async function createBill() {
     changeQuantityProduct();
   }
 }
-
-const createRandomId = (length) => {
-  const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
-  let result = "";
-  for (let i = 0; i < length; i++) {
-    const randomIndex = Math.floor(Math.random() * characters.length);
-    result += characters.charAt(randomIndex);
-  }
-  return result;
-};
-
-const createUniqueId = () => {
-  const createdIds = [];
-  const createId = () => {
-    const id = createRandomId(10);
-    if (createdIds.includes(id)) {
-      return createId();
-    }
-    createdIds.push(id);
-    return id;
-  };
-  return createId;
-};
-const createId = createUniqueId();
-
-const sumCounts = (arr) => {
-  const totalCount = arr.reduce((sum, item) => sum + item.count, 0);
-  return totalCount;
-};
 
 const changeQuantityProduct = () => {
   const products = library.getDataFromLS(keyLocalStorageListSP);
@@ -110,7 +84,7 @@ const restoreQuantityProduct = async (id) => {
 
 const showDetail = async (id) => {
   const showPopup = document.querySelector(".popup");
-  const popupBg = document.querySelector(".background__popup");
+  const popupBg = document.querySelector(".popup__background");
   showPopup.style.display = "block";
   popupBg.style.display = "block";
   await renderDetailProduct(id);
@@ -118,7 +92,7 @@ const showDetail = async (id) => {
 
 const hideDetail = () => {
   const hidePopup = document.querySelector(".popup");
-  const popupBg = document.querySelector(".background__popup");
+  const popupBg = document.querySelector(".popup__background");
   hidePopup.style.display = "none";
   popupBg.style.display = "none";
 };
