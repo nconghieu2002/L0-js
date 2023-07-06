@@ -1,11 +1,13 @@
-function getData() {
+(function getData() {
   if (library.getDataFromLS(keyLocalStorageListSP) === null) {
     library.setDataToLS(keyLocalStorageListSP, listData);
   }
   const listProduct = document.querySelector(".container");
   const data = library.getDataFromLS(keyLocalStorageListSP);
 
-  listProduct.innerHTML = data
+  const remainProducts = data.filter((data) => data.numberOf !== 0);
+
+  listProduct.innerHTML = remainProducts
     .map((data) => {
       return `<div class="card__item">
       <div class="content">
@@ -13,7 +15,7 @@ function getData() {
         <h3 class="name__shoes">${data.name}</h3>
         <div class="wrapper">
           <div class="price">$${data.price}</div>
-          <div class="quantity">Quantity: ${data.soLuong}</div>
+          <div class="quantity">Quantity: ${data.numberOf}</div>
         </div>
       </div>
       <button onclick="addSP('${data.id}')">
@@ -36,8 +38,8 @@ function getData() {
     </div>`;
     })
     .join("");
-}
-getData();
+  handleQuantityIcon();
+})();
 
 function addSP(id) {
   let cart = [];
@@ -55,32 +57,27 @@ function addSP(id) {
   let existingProduct = cart.find((item) => item.id === productId);
   let foundProductIndex = data.findIndex((item) => item.id === productId);
   if (existingProduct) {
-    if (existingProduct.count < data[foundProductIndex].soLuong) {
+    if (existingProduct.count < data[foundProductIndex].numberOf) {
       existingProduct.count++;
       showNotification();
     } else {
       alert("Vượt quá số lượng sản phẩm sẵn có");
     }
   } else {
-    if (data[foundProductIndex].soLuong === 0) {
-      alert("Sản phẩm đã hết hàng");
-    } else {
-      cart.push(product);
-      showNotification();
-    }
+    cart.push(product);
+    showNotification();
   }
   library.setDataToLS(keyLocalStorageItemCart, cart);
   handleQuantityIcon();
 }
 
-const handleQuantityIcon = () => {
+function handleQuantityIcon() {
   const products = library.getDataFromLS(keyLocalStorageItemCart);
   const quantity = document.querySelector(".header__quantity");
   if (products) {
     quantity.innerHTML = `${products.length}`;
   }
-};
-handleQuantityIcon();
+}
 
 const showNotification = () => {
   const report = document.querySelector(".notify");

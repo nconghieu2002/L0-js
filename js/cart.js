@@ -1,43 +1,3 @@
-function handleTotal() {
-  const listProducts = library.getCartProducts(
-    library.getDataFromLS(keyLocalStorageListSP),
-    library.getDataFromLS(keyLocalStorageItemCart)
-  );
-  const sumPrice = listProducts.reduce((total, product) => {
-    return total + library.totalPriceProduct(product.price, product.count);
-  }, 0);
-  totalMap.set("sumPrice", sumPrice);
-  const total = document.querySelector(".total__bottom");
-  if (total) {
-    total.innerHTML = `Total: $${sumPrice}`;
-  }
-}
-handleTotal();
-
-function emptyCart() {
-  const emptyCart = document.querySelector(".empty__cart");
-  const buyBtn = document.querySelector(".buy");
-  const totalBottom = document.querySelector(".total__bottom");
-  const data = library.getDataFromLS(keyLocalStorageItemCart);
-
-  if (!data || data.length === 0) {
-    if (emptyCart) {
-      emptyCart.innerHTML = `
-    <img
-    src="https://th.bing.com/th/id/R.afa6a28d0ee0b5e7d55b7a5aecdfedec?rik=eOl3Z%2bU0XvmYlw&riu=http%3a%2f%2fiticsystem.com%2fimg%2fempty-cart.png&ehk=0omil1zRH7T3Pb5iTzvueamUQLSSb55vgY7dLFF8Bl8%3d&risl=&pid=ImgRaw&r=0"
-    alt=""
-    />`;
-    }
-    if (buyBtn) {
-      buyBtn.style.display = "none";
-    }
-    if (totalBottom) {
-      totalBottom.style.display = "none";
-    }
-  }
-}
-emptyCart();
-
 function renderProduct() {
   const listProducts = library.getCartProducts(
     library.getDataFromLS(keyLocalStorageListSP),
@@ -86,7 +46,44 @@ function renderProduct() {
       .join("");
   }
 }
-renderProduct();
+
+function handleTotal() {
+  const listProducts = library.getCartProducts(
+    library.getDataFromLS(keyLocalStorageListSP),
+    library.getDataFromLS(keyLocalStorageItemCart)
+  );
+  const sumPrice = listProducts.reduce((total, product) => {
+    return total + library.totalPriceProduct(product.price, product.count);
+  }, 0);
+  totalMap.set("sumPrice", sumPrice);
+  const total = document.querySelector(".total__bottom");
+  if (total) {
+    total.innerHTML = `Total: $${sumPrice}`;
+  }
+}
+
+function emptyCart() {
+  const emptyCart = document.querySelector(".empty__cart");
+  const buyBtn = document.querySelector(".buy");
+  const totalBottom = document.querySelector(".total__bottom");
+  const data = library.getDataFromLS(keyLocalStorageItemCart);
+
+  if (!data || data.length === 0) {
+    if (emptyCart) {
+      emptyCart.innerHTML = `
+    <img
+    src="https://th.bing.com/th/id/R.afa6a28d0ee0b5e7d55b7a5aecdfedec?rik=eOl3Z%2bU0XvmYlw&riu=http%3a%2f%2fiticsystem.com%2fimg%2fempty-cart.png&ehk=0omil1zRH7T3Pb5iTzvueamUQLSSb55vgY7dLFF8Bl8%3d&risl=&pid=ImgRaw&r=0"
+    alt=""
+    />`;
+    }
+    if (buyBtn) {
+      buyBtn.style.display = "none";
+    }
+    if (totalBottom) {
+      totalBottom.style.display = "none";
+    }
+  }
+}
 
 function handleModal() {
   const modal = document.querySelector(".background__modal");
@@ -103,7 +100,6 @@ function handleModal() {
     hideButton.addEventListener("click", () => (modal.style.display = "none"));
   }
 }
-handleModal();
 
 function handleCountProduct() {
   const data = library.getDataFromLS(keyLocalStorageListSP);
@@ -121,7 +117,7 @@ function handleCountProduct() {
       if (cartIndex !== -1) {
         const productCount = cart[cartIndex].count;
         const productData = data.find((item) => item.id === id);
-        if (productCount < productData.soLuong) {
+        if (productCount < productData.numberOf) {
           cart[cartIndex].count++;
           count[index].textContent = cart[cartIndex].count;
           subTotal[index].textContent = `$${library.totalPriceProduct(
@@ -161,7 +157,6 @@ function handleCountProduct() {
     });
   });
 }
-handleCountProduct();
 
 function handleDeleteProduct(id) {
   const confirmDelete = confirm("Bạn có muốn xóa sản phẩm này?");
@@ -176,3 +171,11 @@ function handleDeleteProduct(id) {
   handleCountProduct();
   emptyCart();
 }
+
+(function () {
+  renderProduct();
+  handleCountProduct();
+  handleTotal();
+  emptyCart();
+  handleModal();
+})();

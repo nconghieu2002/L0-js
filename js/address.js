@@ -9,7 +9,7 @@ const createOption = (value, text) => {
   return option;
 };
 
-const handleProvince = async () => {
+(async function handleProvince() {
   const provinces = await library.getDataFromApi(
     "https://provinces.open-api.vn/api/p/"
   );
@@ -18,10 +18,9 @@ const handleProvince = async () => {
     const option = createOption(province.code, province.name);
     selectProvince.appendChild(option);
   });
-};
-handleProvince();
+})();
 
-const handleDistrict = async () => {
+(async function handleDistrict() {
   const districts = await library.getDataFromApi(
     "https://provinces.open-api.vn/api/d/"
   );
@@ -35,10 +34,9 @@ const handleDistrict = async () => {
       }
     });
   });
-};
-handleDistrict();
+})();
 
-const handleWard = async () => {
+(async function handleWard() {
   const wards = await library.getDataFromApi(
     "https://provinces.open-api.vn/api/w/"
   );
@@ -54,5 +52,4 @@ const handleWard = async () => {
       }
     });
   });
-};
-handleWard();
+})();

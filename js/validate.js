@@ -35,7 +35,7 @@ function validateInput(
   });
 }
 
-function validateName() {
+(function validateName() {
   const firstName = document.querySelector("#first__name");
   const lastName = document.querySelector("#last__name");
   const errFirstName = document.querySelector("#first__name--error");
@@ -60,10 +60,9 @@ function validateName() {
     "Vui lòng nhập Tên",
     "Tên không được chứa chữ số hoặc ký tự đặc biệt"
   );
-}
-validateName();
+})();
 
-function validateEmail() {
+(function validateEmail() {
   const email = document.querySelector("#email");
   const errEmail = document.querySelector("#email--error");
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -77,10 +76,9 @@ function validateEmail() {
     "Vui lòng nhập Email",
     "Email phải có dạng: abc@def.xyz"
   );
-}
-validateEmail();
+})();
 
-function validatePhone() {
+(function validatePhone() {
   const phone = document.querySelector("#phone");
   const errPhone = document.querySelector("#phone--error");
   const phoneRegex = /^\d{10}$/;
@@ -94,10 +92,9 @@ function validatePhone() {
     "Vui lòng nhập Số điện thoại",
     "Số điện thoại phải có 10 chữ số và bắt đầu bằng chữ số 0"
   );
-}
-validatePhone();
+})();
 
-function validateHomeNumber() {
+(function validateHomeNumber() {
   const homeNumber = document.querySelector("#home__number");
   const errHomeNumber = document.querySelector("#home__number--error");
   const homeNumberRegex = /[a-zA-Z0-9]/g;
@@ -111,10 +108,9 @@ function validateHomeNumber() {
     "Vui lòng nhập Số nhà",
     "Số nhà không được chứa ký tự đặc biệt"
   );
-}
-validateHomeNumber();
+})();
 
-function validateAddress() {
+(function validateAddress() {
   const province = document.querySelector("#province");
   const district = document.querySelector("#district");
   const ward = document.querySelector("#ward");
@@ -150,10 +146,9 @@ function validateAddress() {
       districtError.textContent = "";
     }
   });
-}
-validateAddress();
+})();
 
-function handleSubmit() {
+(function handleSubmit() {
   const submit = document.querySelector(".modal__submit");
   submit.addEventListener("click", () => {
     const firstName = document.querySelector("#first__name");
@@ -197,5 +192,4 @@ function handleSubmit() {
         "Vui lòng nhập Phường/ Xã";
     }
   });
-}
-handleSubmit();
+})();

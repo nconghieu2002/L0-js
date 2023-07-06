@@ -51,7 +51,7 @@ const changeQuantityProduct = () => {
       (productItem) => productItem.id === cartItem.id
     );
     if (product) {
-      product.soLuong -= cartItem.count;
+      product.numberOf -= cartItem.count;
     }
   });
   library.setDataToLS(keyLocalStorageListSP, products);
@@ -73,7 +73,7 @@ const restoreQuantityProduct = async (id) => {
           (productItem) => productItem.id === billProduct.id
         );
         if (product) {
-          product.soLuong += billProduct.count;
+          product.numberOf += billProduct.count;
         }
       }
     });
@@ -117,7 +117,7 @@ const renderDetailProduct = async (id) => {
   }
 };
 
-async function renderDataFromApi() {
+(async function renderDataFromApi() {
   const bill = document.querySelector(".bill__content");
   const data = await getProductsFromApi();
   if (bill) {
@@ -184,5 +184,4 @@ async function renderDataFromApi() {
       })
       .join("");
   }
-}
-renderDataFromApi();
+})();

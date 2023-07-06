@@ -11,7 +11,7 @@ const library = (() => {
   const getDataFromApi = async (url) => {
     const response = await fetch(url);
     if (!response.ok) {
-      throw new Error(response.statusText);
+      console.error(response.statusText);
     }
     const data = await response.json();
     return data;
@@ -29,7 +29,7 @@ const library = (() => {
       const responseData = await response.json();
       return responseData;
     } catch (error) {
-      throw error;
+      console.error(error);
     }
   };
 
@@ -42,7 +42,7 @@ const library = (() => {
       const data = await response.json();
       return data;
     } catch (error) {
-      throw error;
+      console.error(error);
     }
   };
 
@@ -57,7 +57,7 @@ const library = (() => {
               name: data[i].name,
               image: data[i].image,
               price: data[i].price,
-              quantity: data[i].soLuong,
+              quantity: data[i].numberOf,
               count: cart[j].count,
             };
             listProducts.push(product);
@@ -95,12 +95,12 @@ const library = (() => {
   const totalPriceProduct = (price, count) => {
     return price * count;
   };
-  
+
   const handleSum = (arr, property) => {
     if (Array.isArray(arr) && arr.length > 0) {
-      if (typeof arr[0] === "number") {
+      if (typeof property === "undefined") {
         return arr.reduce((total, num) => total + num, 0);
-      } else if (typeof arr[0] === "object" && property) {
+      } else {
         return arr.reduce((total, obj) => total + obj[property], 0);
       }
     }
