@@ -89,6 +89,7 @@ function handleModal() {
   const modal = document.querySelector(".background__modal");
   let buyButton = document.querySelector(".buy");
   let hideButton = document.querySelector(".modal__close");
+  let cancelButton = document.querySelector(".modal__cancel");
 
   if (buyButton) {
     buyButton.addEventListener(
@@ -96,8 +97,12 @@ function handleModal() {
       () => (modal.style.display = "inline-block")
     );
   }
-  if (hideButton) {
+  if (hideButton || cancelButton) {
     hideButton.addEventListener("click", () => (modal.style.display = "none"));
+    cancelButton.addEventListener(
+      "click",
+      () => (modal.style.display = "none")
+    );
   }
 }
 
