@@ -9,6 +9,15 @@ const setInfo = {
   isHomeNumber: false,
 };
 
+const firstName = document.querySelector("#first__name");
+const lastName = document.querySelector("#last__name");
+const email = document.querySelector("#email");
+const phone = document.querySelector("#phone");
+const homeNumber = document.querySelector("#home__number");
+const province = document.querySelector("#province");
+const district = document.querySelector("#district");
+const ward = document.querySelector("#ward");
+
 function validateInput(
   input,
   errorElement,
@@ -36,8 +45,6 @@ function validateInput(
 }
 
 (function validateName() {
-  const firstName = document.querySelector("#first__name");
-  const lastName = document.querySelector("#last__name");
   const errFirstName = document.querySelector("#first__name--error");
   const errLastName = document.querySelector("#last__name--error");
   const nameRegex = /^[\p{L} ]+$/u;
@@ -63,7 +70,6 @@ function validateInput(
 })();
 
 (function validateEmail() {
-  const email = document.querySelector("#email");
   const errEmail = document.querySelector("#email--error");
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -79,9 +85,8 @@ function validateInput(
 })();
 
 (function validatePhone() {
-  const phone = document.querySelector("#phone");
   const errPhone = document.querySelector("#phone--error");
-  const phoneRegex = /^\d{10}$/;
+  const phoneRegex = /((84|0)[3|5|7|8|9])+([0-9]{8})\b/g;
 
   validateInput(
     phone,
@@ -90,12 +95,11 @@ function validateInput(
     setInfo,
     "isPhone",
     "Vui lòng nhập Số điện thoại",
-    "Số điện thoại phải có 10 chữ số và bắt đầu bằng chữ số 0"
+    "Số điện thoại phải bắt đầu bằng chữ số 0 hoặc 84 và có các đầu số Việt Nam"
   );
 })();
 
 (function validateHomeNumber() {
-  const homeNumber = document.querySelector("#home__number");
   const errHomeNumber = document.querySelector("#home__number--error");
   const homeNumberRegex = /[a-zA-Z0-9]/g;
 
@@ -111,9 +115,6 @@ function validateInput(
 })();
 
 (function validateAddress() {
-  const province = document.querySelector("#province");
-  const district = document.querySelector("#district");
-  const ward = document.querySelector("#ward");
   const provinceError = document.querySelector("#province--error");
   const districtError = document.querySelector("#district--error");
   const wardError = document.querySelector("#ward--error");
@@ -151,15 +152,6 @@ function validateInput(
 (function handleSubmit() {
   const submit = document.querySelector(".modal__submit");
   submit.addEventListener("click", () => {
-    const firstName = document.querySelector("#first__name");
-    const lastName = document.querySelector("#last__name");
-    const email = document.querySelector("#email");
-    const phone = document.querySelector("#phone");
-    const province = document.querySelector("#province");
-    const district = document.querySelector("#district");
-    const ward = document.querySelector("#ward");
-    const homeNumber = document.querySelector("#home__number");
-
     if (firstName.value.trim() === "") {
       document.querySelector("#first__name--error").innerHTML =
         "Vui lòng nhập Họ";
@@ -193,3 +185,23 @@ function validateInput(
     }
   });
 })();
+
+function clearInputs() {
+  firstName.value = "";
+  lastName.value = "";
+  email.value = "";
+  phone.value = "";
+  homeNumber.value = "";
+  province.value = "--Chọn Tỉnh/ Thành phố--";
+  district.value = "--Chọn Huyện/ Quận--";
+  ward.value = "--Chọn Phường/ Xã--";
+
+  document.querySelector("#first__name--error").innerHTML = "";
+  document.querySelector("#last__name--error").innerHTML = "";
+  document.querySelector("#email--error").innerHTML = "";
+  document.querySelector("#phone--error").innerHTML = "";
+  document.querySelector("#home__number--error").innerHTML = "";
+  document.querySelector("#province--error").textContent = "";
+  document.querySelector("#district--error").textContent = "";
+  document.querySelector("#ward--error").textContent = "";
+}

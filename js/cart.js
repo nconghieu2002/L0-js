@@ -98,10 +98,13 @@ function handleModal() {
     );
   }
   if (hideButton || cancelButton) {
-    hideButton.addEventListener("click", () => (modal.style.display = "none"));
+    hideButton.addEventListener(
+      "click",
+      () => ((modal.style.display = "none"), clearInputs())
+    );
     cancelButton.addEventListener(
       "click",
-      () => (modal.style.display = "none")
+      () => ((modal.style.display = "none"), clearInputs())
     );
   }
 }
